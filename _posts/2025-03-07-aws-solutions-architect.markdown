@@ -4,6 +4,44 @@ title:  "AWS Solutions Architect"
 date:   2025-03-07 22:00:00 -0300
 categories: AWS Solutions Architect
 ---
+
+## Zones
+1. Region: Isolated geographic area, each region consist of multiple data centers and is designed to provide low-latency and high availability.
+  * eg: us-east-1.
+1. Availability-Zone (AZs): Each region consist of multiple AZs which are physically separate data centers.
+  * eg: us-east-1a, us-east-1b.
+1. Edge-Location: data centers strategically positioned around the world to process requests closer to the end users.
+  * eg: 450 Edges locations worldwide.
+
+## IAM
+Service that helps you securely control access to AWS resources.
+
+### Access Methods
+1. CLI (Need roles to access)
+1. CloudShell
+1. Console
+1. API Calls (Need roles to access)
+
+### What can I create with IAM
+1. Users.
+  * Assign each user a specific access.
+1. Groups.
+  * Users that share the same resources.
+1. Roles.
+  * Grant permissions to resources without using long-term credentials like passwords or access keys.
+  * Uses STS
+1. Policies.
+  * JSON based **permission rules** attached to users, groups, or roles.  
+  * Identity based policies (applied to Users, Groups, or Roles).  
+  * Resource based policies (applied to AWS resources like S3, Lambda, etc.).  
+
+### STS (Security Token Service)
+AWS STS generates temporary security credentials for IAM roles, these credentials automatically expire (no need for manual rotation).  
+
+1. Grants temporary, limited-time access to AWS resources.  
+1. For cross-account access (users in one account assume a role in another).  
+1. When using federated authentication (e.g., integrating AWS with Google, Okta, etc.).  
+
 ## S3
 Object-based storage, it manages data as objects opposed to other storage architectures.
 
@@ -210,7 +248,7 @@ Web service that enables you to request temporary, limited-privileged credential
   * GetFederationToken
   * GetSessionToken
 
-## VPS
+## VPC (Virtual Private Cloud)
 Is a isolated virtual network, resembles a traditional network you'd operate in your own datacenter.
   * Launching a virtual machine. (EC2)
   * ENIs (Elastic Network Interfaces) is used within a VPC.
@@ -241,6 +279,26 @@ Is a isolated virtual network, resembles a traditional network you'd operate in 
   * VPCs, Route Tables, NACLs, Internet Gateways, Security Groups and SUbnets.
 1. Some things cost money
   * VPC Endpoints, VPN Gateway, Customer Gateway, IPv4 Access.
+
+
+## Lake Formation
+Data lake to centrally govern, secure and globally share data for analytics and machine learning.
+
+1. Manage fine-grained access control for your data lake data on Amazon S3.
+1. Manage metadata in AWS Glue Data Catalog.
+1. Lake formation provide its own permissions model that augments the IAM Permission model.
+  * Thought a simple grant or revoke mechanism similar to RDBMS.
+1. Allow you to share data internally and externally across multiple AWS Accounts, AWS Organizations or directly with IAM.
+1. Permissions are enforced using granular controls at the column, row, and cell-levels across.
+  * Athena
+  * Quicksight
+  * Redshift 
+  * EMR
+  * Glue
+
+### Data Lake Recap
+Centralized data repository for unstructured data or semi-structured data.
+  * Data lake generally uses objects (blobs) or file as its storages medium.
 
 
 

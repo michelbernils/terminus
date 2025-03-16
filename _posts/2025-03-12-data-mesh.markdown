@@ -1,0 +1,39 @@
+---
+layout: post
+title:  "Data Mesh"
+date:   2025-03-12 22:00:00 -0300
+categories: Data Mesh
+---
+
+## Data Mesh 
+
+### Outcomes
+1. Respond gracefully to changes.
+1. Sustain agility in the face of growth.
+1. Increase the ratio of value from data to investment.
+
+### The Shifts
+1. Organizationally: Shifts from centralized ownership of data, to a decentralized ownership, where the owner of the business are responsible for the data.
+1. Architecturally: Shifts from collecting data from monolithic warehouses and lakes to connecting data through a distributed mesh.
+1. Technologically: Shifts from technology solutions that treat data as a byproduct to solutions that treat data and code that maintains it as one lively autonomous unit.
+1. Operationally: Shifts data governance from a top-down centralized operational model with human interventions to a model with computational policies.
+1. Principally: Shifts our value system from data as an asset to be collected to data as a product to serve and delight the data user.
+1. Infrastructural: Shifts from two sets of fragmented and point-to-point integrated infrastructure services—one for data and analytics and the other for
+applications and operational systems to a well-integrated set of infrastructure for both operational and data systems
+
+### Principles
+These principles are designed to progress us toward the objectives of data mesh: increase value from data at scale, sustain agility as an organization grows, and embrace change in a complex and volatile business context.
+
+1. Domain Ownership: Decentralize the ownership of data to business domains closest to the data.
+1. Data as a product: Domain-oriented data is shared as a product directly with data users—data analysts, data scientists, and so on.
+1. Self-serve data platform: Empowers teams to share data.
+1. Federated Computational Governance: Ensures that data products across the organization follow common governance policies while allowing domain teams to operate independently.
+
+### Types of Data:
+1. Operational: Running the business and keeps the current state of the business with transactional integrity. This data is captured, stored, and processed by transactions in real time, by OLTP (online transaction processing) systems.
+1. Analytical: Refers to data that has been transformed and optimized for analysis, unlike raw data, which is stored in its original form without significant processing. Analytical data is structured to facilitate queries, reporting, and machine learning.
+
+### Principle of Domain Ownership
+
+
+
