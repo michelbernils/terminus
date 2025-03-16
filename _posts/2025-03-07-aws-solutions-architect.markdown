@@ -5,7 +5,7 @@ date:   2025-03-07 22:00:00 -0300
 categories: AWS Solutions Architect
 ---
 
-## Zones
+# Zones
 1. Region: Isolated geographic area, each region consist of multiple data centers and is designed to provide low-latency and high availability.
   * eg: us-east-1.
 1. Availability-Zone (AZs): Each region consist of multiple AZs which are physically separate data centers.
@@ -13,7 +13,7 @@ categories: AWS Solutions Architect
 1. Edge-Location: data centers strategically positioned around the world to process requests closer to the end users.
   * eg: 450 Edges locations worldwide.
 
-## IAM
+# IAM
 Service that helps you securely control access to AWS resources.
 
 ### Access Methods
@@ -31,7 +31,7 @@ Service that helps you securely control access to AWS resources.
   * Grant permissions to resources without using long-term credentials like passwords or access keys.
   * Uses STS
 1. Policies.
-  * JSON based **permission rules** attached to users, groups, or roles.  
+  * JSON based permission rules attached to users, groups, or roles.  
   * Identity based policies (applied to Users, Groups, or Roles).  
   * Resource based policies (applied to AWS resources like S3, Lambda, etc.).  
 
@@ -42,7 +42,7 @@ AWS STS generates temporary security credentials for IAM roles, these credential
 1. For cross-account access (users in one account assume a role in another).  
 1. When using federated authentication (e.g., integrating AWS with Google, Okta, etc.).  
 
-## S3
+# S3
 Object-based storage, it manages data as objects opposed to other storage architectures.
 
 1. S3 provides *unlimited storage.
@@ -162,7 +162,6 @@ Way to reference the address of a bucket and a object.
   * Has Retrieval Fee.
   * Has a minimum storage duration charge of 30 days.
 
-
 ### Security Overview
 1. Bucket Policies: Define permissions for an entire S3 bucket using JSON-based access policy language.
 1. Access Control Lists (ACLs): Provide a legacy method to manage access permissions on individual objects and buckets.
@@ -193,7 +192,7 @@ Is a feature that comes by default, to block all public access to the bucket.
 ### Bucket Policies
 Resource-based policy to grant an s3 bucket and bucket objects to other principles eg. AWS Accounts, Users, AWS Services.
 
-## Snowball Family
+# Snowball Family
 Petabyte scale data transfer service, move data into AWS via physical briefcase computer.
 
 ### Snowball
@@ -219,7 +218,7 @@ Petabyte scale data transfer service, move data into AWS via physical briefcase 
 1. 24/7 video surveillance
 1. An escort security vehicle while in transit.
 
-## AWS API (Go back and watch it again)
+# AWS API (Go back and watch it again)
 
 ### Access Keys
 Is a key and secret required to have programmatic access to AWS resources when interacting with AWS API outside the AWS Management Console.
@@ -248,7 +247,7 @@ Web service that enables you to request temporary, limited-privileged credential
   * GetFederationToken
   * GetSessionToken
 
-## VPC (Virtual Private Cloud)
+# VPC (Virtual Private Cloud)
 Is a isolated virtual network, resembles a traditional network you'd operate in your own datacenter.
   * Launching a virtual machine. (EC2)
   * ENIs (Elastic Network Interfaces) is used within a VPC.
@@ -281,7 +280,7 @@ Is a isolated virtual network, resembles a traditional network you'd operate in 
   * VPC Endpoints, VPN Gateway, Customer Gateway, IPv4 Access.
 
 
-## Lake Formation
+# Lake Formation
 Data lake to centrally govern, secure and globally share data for analytics and machine learning.
 
 1. Manage fine-grained access control for your data lake data on Amazon S3.
@@ -301,12 +300,7 @@ Centralized data repository for unstructured data or semi-structured data.
   * Data lake generally uses objects (blobs) or file as its storages medium.
 
 
-
-
-
-
-
-## Route 53
+# Route 53
 1. Managed DNS (Domain Name System)
 1. DNS is a collection of rules and records which helps clients understand how to reach a server through URLs.
 1. Most commons records are:
