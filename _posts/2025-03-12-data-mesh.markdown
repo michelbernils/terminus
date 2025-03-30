@@ -37,3 +37,4 @@ These principles are designed to progress us toward the objectives of data mesh:
 
 
 
+

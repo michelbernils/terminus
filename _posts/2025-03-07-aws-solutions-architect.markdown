@@ -337,7 +337,7 @@ Fully managed NoSQL database designed for high performance, scalability, and low
 
 1. High Availability and Durability.
 1. Ideal for applications that has known access patterns.
-1. Access through API, ORMs and IAM.
+1. Access through API, ORMs and IAM. 
 1. Great integration with AWS Services.
 
 #### Core Concepts
