@@ -2,50 +2,86 @@
 layout: post
 title:  "AWS Solutions Architect"
 date:   2025-03-07 22:00:00 -0300
-categories: AWS Solutions Architect
+categories: aws architect
 ---
 
 # Zones
-1. Region: Isolated geographic area, each region consist of multiple data centers and is designed to provide low-latency and high availability.
+1. *Region*: Isolated geographic area, each region consist of multiple data centers and is designed to provide low-latency and high availability.
   * eg: us-east-1.
-1. Availability-Zone (AZs): Each region consist of multiple AZs which are physically separate data centers.
+1. *Availability-Zone (AZs)*: Each region consist of multiple AZs which are physically separate data centers.
+  * physical data-center.
   * eg: us-east-1a, us-east-1b.
-1. Edge-Location: data centers strategically positioned around the world to process requests closer to the end users.
+1. *Edge-Location*: Data centers strategically positioned around the world to process requests closer to the end users.
   * eg: 450 Edges locations worldwide.
+1. *Wave-length*: Ultra-low latency applications by deploying compute and storage at the edge of 5G networks.
+  * eg: AWS Wavelength in Verizon 5G network
+1. *Local-Zones*: Closer to end-users in specific metro areas, reducing latency for applications requiring near real-time processing.
+  * eg: AWS Local Zone in Los Angeles, California
+1. *Outposts*: Fully managed service that extends AWS infrastructure, services, APIs, and tools to on-premises data centers or co-location facilities.
+  * eg: Banks can process transactions locally using Outposts while archiving data in AWS S3.
 
 # IAM
 Service that helps you securely control access to AWS resources.
 
-### Access Methods
+#### Access Methods
 1. CLI (Need roles to access)
 1. CloudShell
 1. Console
 1. API Calls (Need roles to access)
 
-### What can I create with IAM
-1. Users.
-  * Assign each user a specific access.
-1. Groups.
-  * Users that share the same resources.
-1. Roles.
+#### What can I create with IAM
+1. Users: Assign each user a specific access.
+1. Groups: Users that share the same resources.
+1. Roles: Temporary access to someone.
   * Grant permissions to resources without using long-term credentials like passwords or access keys.
   * Uses STS
-1. Policies.
+1. Policies: 
   * JSON based permission rules attached to users, groups, or roles.  
   * Identity based policies (applied to Users, Groups, or Roles).  
-  * Resource based policies (applied to AWS resources like S3, Lambda, etc.).  
+  * Resource based policies (applied to AWS resources like S3, Lambda, etc.).
+1. Resources: Entities you create in AWS. eg: s3 buckets or objects.
+1. Trust relationships: 
 
-### STS (Security Token Service)
+#### STS (Security Token Service)
 AWS STS generates temporary security credentials for IAM roles, these credentials automatically expire (no need for manual rotation).  
 
 1. Grants temporary, limited-time access to AWS resources.  
 1. For cross-account access (users in one account assume a role in another).  
 1. When using federated authentication (e.g., integrating AWS with Google, Okta, etc.).  
 
-# S3
+# AWS API (Go back and watch it again)
+
+#### Access Keys
+Is a key and secret required to have programmatic access to AWS resources when interacting with AWS API outside the AWS Management Console.
+  * Commonly known as AWS Credentials.
+  * Never share your access keys and secrets.
+  * Never commit access keys to a codebase.
+  * You can have two active access keys.
+  * Access keys have whatever access a user has to AWS resources
+
+#### STS
+Web service that enables you to request temporary, limited-privileged credentials for IAM users or federated users.
+
+1. STS will return:
+  * AccessKeyID
+  * SecretAccessKey
+  * SessionToken
+  * Expiration
+
+1. You can use this following API actions to obtain STS.
+  * AssumeRole
+  * AssumeRoleWithWebIdentity
+  * AssumeRoleWithSAML
+  * DecodeAuthorizationMessage
+  * GetAccessInfo
+  * GetCallerIdentity
+  * GetFederationToken
+  * GetSessionToken
+
+# S3 (Simples Storage Service)
 Object-based storage, it manages data as objects opposed to other storage architectures.
 
-1. S3 provides *unlimited storage.
+1. S3 provides unlimited storage.
 1. You don't need to think about the underlying infrastructure. (serverless service)
 1. The S3 console provides an interface for you to upload and access your data.
 1. You can store an individual object from 0 bytes to 5 terabytes in size.
@@ -62,7 +98,7 @@ Object-based storage, it manages data as objects opposed to other storage archit
 1. S3 Bucket: Buckets hold objects. Buckets can also have folder which in turn hold objects.
   * S3 is a universal namespace, so buckets names must be uniques. (think like having a domain-name)
 
-### Bucket Types
+#### Bucket Types
 1. General purpose bucket
   * Organizes data in a flat hierarchy.
   * The original S3 bucket type.
@@ -73,7 +109,7 @@ Object-based storage, it manages data as objects opposed to other storage archit
   * Single digit millisecond performance on PUT and GET.
   * 10 directory buckets per account.
 
-### Object Overview
+#### Object Overview
 1. ETags: A way to detect when the contents of an object has changed without downloading the content.
 1. Checksums: ensures the integrity of a file being uploaded or downloaded.
   * CRC32
@@ -87,29 +123,29 @@ Object-based storage, it manages data as objects opposed to other storage archit
 1. Object Locking: makes data file immutable.
 1. Object Versioning: have multiple version of a data file.
 
-### Object WORM
+#### Object WORM
 Write once read many, good for financial companies, where the object stored cannot be altered.
 
-### Object Lock
+#### Object Lock
 Prevent a deletion of objects in a bucket.
 1. Can only be turned on when the bucket is created.
   * SEC 17a-4, CTCC, FINRA
 1. Can only be made via s3-cli.
 
-### URI
+#### URI
 Way to reference the address of a bucket and a object.
 
-### CLI
+#### CLI
 1. S3: high-level way to interact with s3 objects and buckets.
 1. S3api: low-level way to interact with s3 objects and buckets.
 1. S3control: manage s3 access points, s3 outposts buckets, s3 batch operations, storage lens.
 1. s3outposts: manage end-points for s3 outposts.
 
-### Request Styles
+#### Request Styles
 1. Virtual-hosted-style requests: the bucket name is a subdomain on the host.
 1. Path-style requests: the bucket name is the request path.
 
-### Classes Overview
+#### Classes Overview
 1. Outpost: Object storage to your on-premises AWS Outposts environment
 1. Standard: high durability, Availability, and performance object storage for frequently accessed data.
 1. Intelligent-Tiring: Automatically reduces your storage costs on a granular object level by automatically moving data to the most cost-effective access tier based on access frequency
@@ -119,7 +155,7 @@ Way to reference the address of a bucket and a object.
 1. Glacier Flexible Retrieve: Archive data that is accessed 1—2 times per year and is retrieved asynchronously
 1. Glacier Deep Archive: Archive data that is very rarely accessed and very low cost
 
-### Standard
+#### Standard
 1. Durability: 11 9s. (99,999999999%)
 1. Availability: 4 9s. (99,99%)
 1. Redundancy: 3 or more availability zones.
@@ -131,7 +167,7 @@ Way to reference the address of a bucket and a object.
   * Per Requests.
   * No Retrieval Fee.
 
-### Standard Infrequent Access
+#### Standard Infrequent Access
 1. Durability: 11 9s. (99,999999999%)
 1. Availability: 3 9s. (99,9%)
 1. Redundancy: 3 or more availability zones.
@@ -143,13 +179,13 @@ Way to reference the address of a bucket and a object.
   * Per Requests.
   * Has Retrieval Fee.
 
-### Express One Zone
+#### Express One Zone
 1. 10x faster then standard.
 1. Request cost 50% lower than the S3 Standard.
 1. Data is stored in one AZ (Availability Zone)
 1. Data is stored in a new bucket style, directory bucket.
 
-### One Zone IA
+#### One Zone IA
 1. Durability: 11 9s. (99,999999999%)
 1. Availability: 99,5%
 1. Cost-Effective: cost 20% less from Standard IA
@@ -162,7 +198,7 @@ Way to reference the address of a bucket and a object.
   * Has Retrieval Fee.
   * Has a minimum storage duration charge of 30 days.
 
-### Security Overview
+#### Security Overview
 1. Bucket Policies: Define permissions for an entire S3 bucket using JSON-based access policy language.
 1. Access Control Lists (ACLs): Provide a legacy method to manage access permissions on individual objects and buckets.
 1. AWS PrivateLink for Amazon S3: Enables private network access to S3, bypassing the public internet for enhanced security.
@@ -182,20 +218,20 @@ Way to reference the address of a bucket and a object.
 1. Compliance Validation for Amazon S3: Ensures S3 services meet compliance requirements like HIPAA, GDPR, etc.
 1. Infrastructure Security: Protects the underlying infrastructure of the S3 service, ensuring data integrity and availability.
 
-### Block Public Access
+#### Block Public Access
 Is a feature that comes by default, to block all public access to the bucket.
 1. New access controls lists (acls) 
 1. Any access controls lists
 1. New bucket policies or access points.
 1. Any bucket policies or access points.
 
-### Bucket Policies
+#### Bucket Policies
 Resource-based policy to grant an s3 bucket and bucket objects to other principles eg. AWS Accounts, Users, AWS Services.
 
 # Snowball Family
 Petabyte scale data transfer service, move data into AWS via physical briefcase computer.
 
-### Snowball
+#### Snowball
 1. Low-cost
 1. Faster
 1. Comes in two sizes
@@ -203,49 +239,20 @@ Petabyte scale data transfer service, move data into AWS via physical briefcase 
   * 80 TB
 1. Can import and export from S3.
 
-### Snowball Edge
+#### Snowball Edge
 1. LCD Display
 1. Can use clusters in groups of 5 to 10.
 1. Comes ins two sizes
   * 100 TB (83 TB of usable space)
   * 100 TB Clustered (45 TB per node)
 
-### Snowmobile
+#### Snowmobile
 45-foot-long ruggedize shipping container, pulled by a semi-trailer truck.
 1. Transfer up to 100 PB per Snowmobile.
 1. GPS Tracking
 1. Alarm Monitoring
 1. 24/7 video surveillance
 1. An escort security vehicle while in transit.
-
-# AWS API (Go back and watch it again)
-
-### Access Keys
-Is a key and secret required to have programmatic access to AWS resources when interacting with AWS API outside the AWS Management Console.
-  * Commonly known as AWS Credentials.
-  * Never share your access keys and secrets.
-  * Never commit access keys to a codebase.
-  * You can have two active access keys.
-  * Access keys have whatever access a user has to AWS resources
-
-### STS
-Web service that enables you to request temporary, limited-privileged credentials for IAM users or federated users.
-
-1. STS will return:
-  * AccessKeyID
-  * SecretAccessKey
-  * SessionToken
-  * Expiration
-
-1. You can use this following API actions to obtain STS.
-  * AssumeRole
-  * AssumeRoleWithWebIdentity
-  * AssumeRoleWithSAML
-  * DecodeAuthorizationMessage
-  * GetAccessInfo
-  * GetCallerIdentity
-  * GetFederationToken
-  * GetSessionToken
 
 # VPC (Virtual Private Cloud)
 Is a isolated virtual network, resembles a traditional network you'd operate in your own datacenter.
@@ -254,7 +261,7 @@ Is a isolated virtual network, resembles a traditional network you'd operate in 
   * VPC is tightly coupled with EC2.
   * All VPC commands are under EC2.
 
-### Core Components
+#### Core Components
 1. Internet Gateways (IGW): A gateway that connects your VPC out to the internet.
 1. Virtual Private Network (VPN Gateway): A gateway that connects to a private external network.
 1. Route Tables: Determines where to route traffic within a VPC.
@@ -263,10 +270,15 @@ Is a isolated virtual network, resembles a traditional network you'd operate in 
 1. Security Groups: Act as a stateful virtual firewall for compute within a VPC.
 1. Public Subnets: Allows instances to have public IP Addresses. 
 1. Private Subnets: Subnets that disallows instances to have public IP Addresses.
-1. VPC Endpoints: Privately connect to AWS support services.
+1. VPC Endpoints: Privately connect to AWS support services (S3).
 1. VPC Peering: Connect to VPCs to other VPCs.
+1. Transit Gateway: Connects thousands VPCs together.
+1. VPN: 
+  * Site-to-site: All the company connected.
+  * Client: Remote connect between a secure connection.
+1. Cloudhub: Connects branch companies.
 
-### Key Features
+#### Key Features
 1. VPCs are region specific. They do not spam regions 
   * You can use VPC Peering to connect to VPC across regions.
 1. You can create up to 5 VPC per regions.
@@ -278,7 +290,6 @@ Is a isolated virtual network, resembles a traditional network you'd operate in 
   * VPCs, Route Tables, NACLs, Internet Gateways, Security Groups and SUbnets.
 1. Some things cost money
   * VPC Endpoints, VPN Gateway, Customer Gateway, IPv4 Access.
-
 
 # Lake Formation
 Data lake to centrally govern, secure and globally share data for analytics and machine learning.
@@ -295,9 +306,101 @@ Data lake to centrally govern, secure and globally share data for analytics and 
   * EMR
   * Glue
 
-### Data Lake Recap
+#### Data Lake Recap
 Centralized data repository for unstructured data or semi-structured data.
   * Data lake generally uses objects (blobs) or file as its storages medium.
+
+# Auto-Scaling
+Automatically adjusts the number of compute resources (like EC2 instances or containers) based on demand. 
+
+1. Auto-Scaling Up: Increases the power of a single machine by upgrading to a larger instance (more CPU/RAM).
+1. Auto-Scaling Out: Adds more instances, distributing the load across them.
+1. Auto-Scaling Group: AWS automatically manages the number of EC2 instances based on demand.
+  * Only turn-on and off the machine.
+  * Based on cloudwatch metrics.
+  * Uses Launch Template.
+
+# Elastic Load Balancer (ELB)
+Distributes traffic across multiple instances.
+
+1. *Application Load Balancer (ALB)*: Works on layer 7 (OSI Model), path based/host based
+  * Web apps, APIs, microservices.
+1. *Network Load Balancer (NLB)*: Works on layer 4 (OSI Model), IP and TCP, low-latency, high-performance.
+  * High-speed, real-time apps.
+1. *Gateway Load Balancer (GWLB)*: Works on layer 3 (OSI Model), IP-based, traffic filtering 
+  * Security and inspection services
+1. *Target Groups*: Define a target (EC2, IP, Lambda), attach it to the ELB and gotcha, you are good to go.
+
+
+# DynamoDB
+Fully managed NoSQL database designed for high performance, scalability, and low-latency operations.
+
+1. High Availability and Durability.
+1. Ideal for applications that has known access patterns.
+1. Access through API, ORMs and IAM.
+1. Great integration with AWS Services.
+
+#### Core Concepts
+1. *Tables*: Collections of items, similar to relational database tables but without fixed schemas.
+1. *Items*: Individual records in a table, equivalent to rows in relational databases.
+  * Primary Key: A unique identifier for each item, which can be a Partition Key (single key) or a Partition Key + Sort Key (composite key).
+  * Sort Key: Optional secondary key used for organizing data within the same partition.
+1. *Attributes*: Key-value pairs that store data for an item, similar to columns in relational databases but flexible in structure.
+1. *Indexes*: 
+  * Global Secondary Index (GSI): Allows queries on attributes other than the primary key, with independent read/write capacity.
+  * Local Secondary Index (LSI): Enables sorting and querying using an alternative Sort Key but within the same partition as the primary key.
+
+# EC2
+Scalable virtual servers in the cloud, allowing users to run applications on AWS without the need to buy or maintain physical hardware.
+
+1. Free-tier has 750 hours.
+1. Supports a bunch of OS.
+
+#### Components
+1. VPC
+1. Subnet
+1. Elastic IP-Address
+1. IAM
+1. Security Group (EC2 Firewall)
+1. Key pair (Necessary to access any EC2)
+
+#### Values
+1. *On-demand*: Pay as you use.
+1. *Reserved*: 1 to 3 years, saves 75%.
+1. *Spot*: 90% cheaper, but AWS can claim it anytime.
+1. *Dedicated-Instance*: VM that only you can use.
+1. *Dedicated-Host*: Exclusive server, no sharing.
+1. *Saving-Plans*: Available for Lambda, EC2 and Fargate, pays per hour.
+
+
+# EBS (Elastic Block Store)
+
+1. Always on the same AZ.
+1. To move a EBS to other region, is using snapshot.
+1. EBS Multi-Attach (16 instances), only accepts IO1, instance type Nitro.
+
+#### EBS types
+1. *SSD*: Fast and expensive
+  * GP2: general use, throughput per volume 1000 mb/s, throughput per instance 12500 mb/s.
+  * GP3: lower-cost, throughput per volume 250 mb/s, throughput per volume 7500 mb/s.
+1. *HDD*: Slow and cheaper.
+1. *Provisioned IOPs*:
+  * io2 Block Express: Highest performance EBS volume, Up to 4 million IOPS, for large scale, high-performance database, volume up to 64 TB.
+  * io1: older generation of provisioned IOPs SSD, Up to 64000 IOPS, requiring consistent low latency, volume up to 16 TB.
+1. *Throughput Optimized HDD (st1)*: 
+  * Cheaper then the other options. 
+  * Used for data warehouses, data lakes.
+1. *Cold HD (sc1)*: 
+  * Infrequent access, lower performance.
+1. *Snapshots*: 
+  * Change Availability Zones
+  * Create a new volume.
+
+#### AMI (Multi Machine Image)
+1. 
+
+# Control Tower
+
 
 
 # Route 53
@@ -322,3 +425,5 @@ Centralized data repository for unstructured data or semi-structured data.
 1. Overview
   * public domains that you own or buy.
   * private domain names that can be resolved by your instances in your VPCs.
+
+

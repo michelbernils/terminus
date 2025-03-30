@@ -2,7 +2,7 @@
 layout: post
 title:  "AWS Cloud Practitioner"
 date:   2025-03-07 22:00:00 -0300
-categories: AWS Cloud Practitioner
+categories: aws practitioner
 ---
 ## What is Cloud Computing?
 
