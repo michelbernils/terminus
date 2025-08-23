@@ -5,6 +5,8 @@ date:   2025-03-12 22:00:00 -0300
 categories: data mesh architecture
 ---
 
+**This post is not finished yet**
+
 # Data Mesh 
 
 #### Outcomes
@@ -34,7 +36,4 @@ These principles are designed to progress us toward the objectives of data mesh:
 1. Analytical: Refers to data that has been transformed and optimized for analysis, unlike raw data, which is stored in its original form without significant processing. Analytical data is structured to facilitate queries, reporting, and machine learning.
 
 #### Principle of Domain Ownership
-
-
-
 

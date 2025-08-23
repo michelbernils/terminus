@@ -2,8 +2,10 @@
 layout: post
 title:  "AWS Solutions Architect"
 date:   2025-03-07 22:00:00 -0300
-categories: aws architect
+categories: aws cloud certification
 ---
+
+**This post is not finished yet** 
 
 # Zones
 1. *Region*: Isolated geographic area, each region consist of multiple data centers and is designed to provide low-latency and high availability.
@@ -19,6 +21,35 @@ categories: aws architect
   * eg: AWS Local Zone in Los Angeles, California
 1. *Outposts*: Fully managed service that extends AWS infrastructure, services, APIs, and tools to on-premises data centers or co-location facilities.
   * eg: Banks can process transactions locally using Outposts while archiving data in AWS S3.
+
+# Cloud Adoption Framework (CAF)
+Helps organizations migrate to the cloud with a structured plan, focused em preparing the company, people and technology.
+
+1. Business: How cloud can aggregate value to the business.
+1. People: The employees understand the cloud scenario.
+1. Governance: Policies and Guardrails for the cloud.
+1. Platform: Migrate the workload to the cloud.
+1. Security: Ensure that the data is secured.
+1. Operation: Maintain the operation stable.
+
+# Well-Architected Framework (WAF)
+Grants that everything is efficient and safe.
+
+1. Security: Secure the data.
+1. Reliability: The system is working without failure.
+1. Performance: Being efficient with the resources. 
+1. Cost Optimization: Maximize resources with lowest costs.
+1. Sustainability: Reduce the environment impact.
+
+# Serverless
+Cloud computing services that allow you to build and run applications without managing servers.
+
+1. Compute: AWS Lambda (runs functions on demand)
+1. Databases: Amazon DynamoDB (fully managed NoSQL database)
+1. Messaging & Integration: Amazon SQS (message queue), Amazon SNS (notification service)
+1. Storage: Amazon S3 (object storage for any type of data)
+1. APIs: Amazon API Gateway (manages REST and WebSocket APIs)
+1. Data Processing: AWS Step Functions (workflow orchestration), AWS Glue (serverless ETL)
 
 # IAM
 Service that helps you securely control access to AWS resources.
@@ -40,7 +71,7 @@ Service that helps you securely control access to AWS resources.
   * Identity based policies (applied to Users, Groups, or Roles).  
   * Resource based policies (applied to AWS resources like S3, Lambda, etc.).
 1. Resources: Entities you create in AWS. eg: s3 buckets or objects.
-1. Trust relationships: 
+1. Trust relationships
 
 #### STS (Security Token Service)
 AWS STS generates temporary security credentials for IAM roles, these credentials automatically expire (no need for manual rotation).  
@@ -49,7 +80,7 @@ AWS STS generates temporary security credentials for IAM roles, these credential
 1. For cross-account access (users in one account assume a role in another).  
 1. When using federated authentication (e.g., integrating AWS with Google, Okta, etc.).  
 
-# AWS API (Go back and watch it again)
+# AWS API
 
 #### Access Keys
 Is a key and secret required to have programmatic access to AWS resources when interacting with AWS API outside the AWS Management Console.
@@ -372,7 +403,6 @@ Scalable virtual servers in the cloud, allowing users to run applications on AWS
 1. *Dedicated-Host*: Exclusive server, no sharing.
 1. *Saving-Plans*: Available for Lambda, EC2 and Fargate, pays per hour.
 
-
 # EBS (Elastic Block Store)
 
 1. Always on the same AZ.
@@ -396,12 +426,109 @@ Scalable virtual servers in the cloud, allowing users to run applications on AWS
   * Change Availability Zones
   * Create a new volume.
 
-#### AMI (Multi Machine Image)
-1. 
+# EFS (Elastic File System)
+Scalable, fully managed file storage service for use with AWS cloud and on-premises resources.
+
+1. Only for linux OS.
+1. Multiple-Instances.
+1. Different VPCs.
+1. Different Regions.
+1. Different Availability Zones.
+
+# AMI (Amazon Machine Image)
+Pre-configured template used to launch EC2 instances.
+
+1. Custom AMIs: Create your own AMI with specific settings.
+1. Public & Private AMIs: Use AWS-provided AMIs or share custom AMIs within an account.
+1. Cross-Region Copy: AMIs can be copied to different AWS regions. 
+
+# DLM (Data LifeCycle Manager)
+Automate the creation, retention, and deletion of Amazon EBS (Elastic Block Store) snapshots
+
+1. Automate back-ups.
+1. Create standard AMIs.
+1. Reduce storage costs by delete outdated snapshots.
+
+
+# CloudFormation
+IaC as a code
+
+1. Automate the creation of any AWS service.
+1. JSON or YAML
+
+# Kinesis
+Streaming data service.
+
+1. Serverless
+1. Analyze data in real time.
+1. Kinesis data-stream
+  * Receives data, indexes, send it to another step.
+1. Kinesis data-analytics
+  * Analyze it via SQL -> Lambda -> Can be stored in Database
+1. Kinesis firehouse
+  * Loads the data to a bucket s3 and build it via athena.
+
+# Storage Gateway
+
+1. On-premise and cloud.
+1. Connects to S3.
+1. Have cache, stores most accessed data.
+1. File gateway.
+1. Volume gateway.
+1. Backup gateway.
+
+# API Gateway
+Fully managed service for creating, deploying, and managing APIs at any scale.
+
+1. Routes requests for AWS services.
+1. Handles authentication.
+1. Supports cache.
+
+# Directory Service
+Set up and operate directories in the cloud to securely manage identities and resources. 
+
+1. AWS Managed Microsoft AD: A fully managed Microsoft Active Directory hosted in AWS.
+1. Simple AD: A lightweight directory service based on Samba, offering basic Active Directory functionality.
+1. AD Connector: Acts as a proxy between your on-premises Active Directory and AWS, enabling authentication without directory replication. (-5000 people on company)
+
+# Cognito
+User sign-up, sign-in, and access control to your web and mobile applications.
+
+# Identity Federation
+System of trust between two parties for the purpose of authenticating users and conveying information needed to authorize their access to resources.
+
+1. Use to login using facebook, linkedin, google.
+1. Check IAM Policies.
+1. AD Users.
+
+# Key Management Service (KMS)
+Store all the keys needed to encrypt and decrypt.
+
+1. Stores all the master keys
+1. Rotation Key, Custom Manager occurs in 365 days.
+1. AWS Managed 1095.
+1. Shared Vault.
+
+# Hardware Security Module (HSM)
+Allows you to generate, store, and manage cryptographic keys securely in the AWS Cloud while maintaining full control over them.
+
+1. Same as KMS but only your company has access to it.
 
 # Control Tower
+Set up and manage a secure, multi-account AWS environment following best practices.
 
+1. Landing Zone: Pre-configured, safe, scalable with multiple accounts based on best practices.
+1. Multiple-Accounts Architecture: 
+  * Master Account: Can create new organizations.
+    * These orgs consists in two OUs (Organization Units) with pre-configured accounts.
+      * Core OU: Accounts created with AWS Control Tower, can be used for audition and logs.
+      * Custom OU: Provisioned Accounts.
+1. Guardrails:
+  * Preventive Guardrail: Prevent policy violations before they happen.
+  * Detective Guardrail: Detect and alert on policy violations after they occur.
 
+# Service Catalog
+Allows organizations to create, manage, and distribute catalogs of approved AWS resources and services. It enables administrators to control which services and configurations are available to users, ensuring compliance with organizational standards and governance policies.
 
 # Route 53
 1. Managed DNS (Domain Name System)
@@ -412,18 +539,43 @@ Scalable virtual servers in the cloud, allowing users to run applications on AWS
   * CNAME: URL to URL
   * Alias: URL to AWS Resource
 
-1. Diagrams
-  * A record:
-    - Web-browser -> DNS Request to Route 53 -> Sends back the a A record -> Web-browser makes a HTTP Request to the server -> Server return an HTTP Response.
-  * AAAA Record:
-
 1. Advanced features:
   * Load Balancing (through DNS - also called Client load balancing)
   * Health checks
-  * Routing Policy: simple, failover, geolocation, latency, weighted, multi-value 
+
+1. Routing Policies:
+    * Simple Routing: Basic routing where a single record responds to queries.
+    * Weighted Routing: Distributes traffic across multiple resources based on assigned weights.
+    * Latency Routing: Routes traffic to the resource with the lowest network latency relative to the user’s location.
+    * Failover Routing: Directs traffic to a primary resource and shifts to a backup if the primary becomes unavailable.
+    * Geolocation Routing: Routes traffic based on the user's geographic location.
+    * Geoproximity Routing: Routes traffic based on the user’s geographic location and the proximity of AWS resources.
+    * Multi-Value Answer: Returns multiple values (IP addresses) in response to a DNS query, allowing clients to choose one.
 
 1. Overview
   * public domains that you own or buy.
   * private domain names that can be resolved by your instances in your VPCs.
 
+# Cloudfront CDN
+Content delivery network (CDN) that speeds up the delivery of websites, APIs, videos, and other web assets by caching content at edge locations worldwide.
+
+1. Faster load times
+1. Reduced server load
+1. DDoS protection
+1. Integration with AWS services (S3, Lambda@Edge, etc.)
+
+# SQS (Simple Notification Service)
+Message service
+
+1. Connected to a EC2 or a database.
+1. Message max size 2gb.
+1. Two types of queue.
+  * Fifo: First in First out.
+  * Standard: Offers high throughput, at-least-once delivery, and best-effort ordering (messages may be delivered out of order but are generally processed quickly).
+
+# SNS (Simple Notification Service)
+Notification service
+
+1. Push to cellphone
+1. E-mail
 
