@@ -121,7 +121,3 @@ Content-Type: application/json
    "secondName": "Krahenbuhl",
    "documentNumber": "123456789"
 }
-
-
-
-
